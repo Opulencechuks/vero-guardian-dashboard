@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { isConnected, getPublicKey } from '@stellar/freighter-api';
+import { isConnected, getAddress } from '@stellar/freighter-api';
 
 interface WalletContextType {
   publicKey: string | null;
@@ -24,8 +24,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
       try {
         const connected = await isConnected();
         if (connected) {
-          const pk = await getPublicKey();
-          setPublicKey(pk);
+          const { address } = await getAddress();
+          setPublicKey(address);
           // TODO: Fetch real reputation from Stellar
           setReputation(1250);
         }
@@ -40,8 +40,8 @@ export function WalletProvider({ children }: { children: ReactNode }) {
 
   async function connect() {
     try {
-      const pk = await getPublicKey();
-      setPublicKey(pk);
+      const { address } = await getAddress();
+      setPublicKey(address);
       setReputation(1250);
     } catch (error) {
       console.error('Failed to connect wallet:', error);

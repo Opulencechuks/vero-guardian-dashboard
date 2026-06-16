@@ -22,9 +22,11 @@ export async function castVote(prId: number, publicKey: string): Promise<string>
     .setTimeout(30)
     .build();
 
-  const signed = await signTransaction(tx.toXDR(), { network: 'TESTNET' });
+  const { signedTxXdr } = await signTransaction(tx.toXDR(), {
+    networkPassphrase: StellarSdk.Networks.TESTNET,
+  });
   const result = await server.submitTransaction(
-    StellarSdk.TransactionBuilder.fromXDR(signed, StellarSdk.Networks.TESTNET)
+    StellarSdk.TransactionBuilder.fromXDR(signedTxXdr, StellarSdk.Networks.TESTNET)
   );
   return result.hash;
 }

@@ -5,6 +5,7 @@ import PRFeed from '@/components/PRFeed';
 import TaskCard from '@/components/TaskCard';
 import ErrorBoundary from '@/components/ErrorBoundary';
 import ThemeToggle from '@/components/ThemeToggle';
+import ConnectButton from '@/components/ConnectButton';
 import { Shield, Trophy, Activity, ArrowRight, Code2, CheckCircle2 } from 'lucide-react';
 
 export default function Home() {
@@ -141,6 +142,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </Layout>
+    </div>
   );
 }
